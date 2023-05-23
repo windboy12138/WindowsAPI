@@ -26,6 +26,18 @@ LRESULT CALLBACK    ChildWndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 
+HWND GetParentWindow(HWND child)
+{
+    HWND parent = GetParent(child);
+    if (parent == NULL)
+    {
+        return child;
+    }
+
+    return GetParentWindow(parent);
+}
+
+
 //每1秒，3秒开始执行
 DWORD WINAPI mytimer(LPVOID args)
 {
@@ -34,7 +46,7 @@ DWORD WINAPI mytimer(LPVOID args)
 
     //步骤一:创建定时器
     //如果hWnd为NULL，返回值为新建立的timer的ID
-    UINT timerid1 = SetTimer(NULL, 0, 500, NULL);
+    UINT timerid1 = SetTimer(NULL, 0, 1000, NULL);
     UINT timerid2 = SetTimer(NULL, 0, 3000, NULL);
 
     while ((bRet = GetMessage(&msg, NULL, 0, 0)) != 0)
@@ -80,17 +92,26 @@ DWORD WINAPI mytimer(LPVOID args)
                     {
                         //auto res = Rectangle(hdc, 0, 0, 300, 100);
                         //auto res = AlphaBlend(hdc, 0, 0, 32, 32, color_dc, 0, 0, 32, 32, ftn);
-                        auto res = DrawIconEx(hdc, 0, 0, icon, 32, 32, 0, NULL, DI_NORMAL);
+                        //auto res = DrawIconEx(hdc, 0, 0, icon, 32, 32, 0, NULL, DI_NORMAL);
 
-                        wsprintf(out, L"last is true, res = %d\n", res);
+                        //wsprintf(out, L"last is true, res = %d\n", res);
+                        wsprintf(out, L"child window width=%d, height=%d\n", rect.right - rect.left, rect.bottom - rect.top);
                         OutputDebugString(out);
-
+                        auto res = IsIconic(child_wnd);
+                        wsprintf(out, L"Window minimized=%d\n", res);
+                        OutputDebugString(out);
+                        HWND parent = NULL;
+                        parent = GetParentWindow(child_wnd);
+                        res = IsIconic(parent);
+                        wsprintf(out, L"Parent Window minimized=%d\n", res);
+                        OutputDebugString(out);
                     }
                     else
                     {
                         //auto res = Rectangle(hdc, 300, 300, 200, 100);
-                        //auto res = AlphaBlend(hdc, 300, 300, 32, 32, color_dc, 0, 0, 32, 32, ftn);
-                        auto res = DrawIcon(hdc, 300, 300, icon);
+                        auto res = DrawIconEx(hdc, 50, 0, icon, 32, 32, 0, NULL, DI_NORMAL);
+                        res = AlphaBlend(hdc, 100, 0, 32, 32, color_dc, 0, 0, 32, 32, ftn);
+                        res = DrawIcon(hdc, 0, 0, icon);
 
                         
                         wsprintf(out, L"last is false, res = %d\n", res);
@@ -99,6 +120,7 @@ DWORD WINAPI mytimer(LPVOID args)
 
                     last = !last;
 
+                    DestroyIcon(icon);
                     DeleteObject(cursor);
                     DeleteDC(color_dc);
 
@@ -209,7 +231,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW,                          // Extended window style
                               L"DirectComposition Window Class",               // Name of window class
                               L"DirectComposition Layered Child Window Sample", // Title-bar string
-                              WS_OVERLAPPED | WS_SYSMENU,                      // Top-level window
+                              WS_MAXIMIZE | WS_SYSMENU | WS_MINIMIZEBOX,        // Top-level window
                               CW_USEDEFAULT,                                   // Horizontal position
                               CW_USEDEFAULT,                                   // Vertical position
                               1000,                                            // Width
