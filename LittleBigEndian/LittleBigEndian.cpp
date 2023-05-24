@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <windows.h>
+#include <winsock.h>
+
+#pragma comment (lib, "Ws2_32.lib")
 
 typedef unsigned short CARD16;
 typedef unsigned int CARD32;
@@ -38,8 +41,9 @@ void HostToNetwork(uint32_t* address, int length)
     int cnt = length / 4;
     while (cnt--)
     {
-        uint32_t tmp = (uint32_t)(*address);
-        (*address) = Swap32IfLE(tmp);
+        //uint32_t tmp = (uint32_t)(*address);
+        //(*address) = Swap32IfLE(tmp);
+        (*address) = htonl((*address));
         address++;
     }
 }
@@ -55,8 +59,9 @@ void NetworkToHost(uint32_t* address, int length)
     uint32_t tmp = 0;
     while (cnt--)
     {
-        tmp = (uint32_t)(*address);
-        (*address) = Swap32IfLE(tmp);
+        //tmp = (uint32_t)(*address);
+        //(*address) = Swap32IfLE(tmp);
+        (*address) = ntohl((*address));
         address++;
     }
 }
@@ -71,7 +76,7 @@ int main()
     HostToNetwork((uint32_t*)(&a), sizeof(A));
     HostToNetwork((uint32_t*)(&b), sizeof(B));
 
-    NetworkToHost((uint32_t*)(&a), sizeof(A));
+    HostToNetwork((uint32_t*)(&a), sizeof(A));
     NetworkToHost((uint32_t*)(&b), sizeof(B));
 
     return 0;

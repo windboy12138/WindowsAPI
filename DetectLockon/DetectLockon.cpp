@@ -70,16 +70,16 @@ int main()
     window_class.hInstance = NULL;
     window_class.hIcon = NULL;
     window_class.hCursor = NULL;
-    window_class.hbrBackground = NULL;
+    window_class.hbrBackground = static_cast<HBRUSH>(GetStockObject(LTGRAY_BRUSH));
     window_class.lpszMenuName = NULL;
     window_class.lpszClassName = L"DeviceListener";
     window_class.hIconSm = NULL;
     auto res = RegisterClassExW(&window_class);
 
     message_wnd_ = CreateWindowExW(
-        WS_EX_LAYERED, L"DeviceListener", L"DeviceListener",
+        NULL, L"DeviceListener", L"DeviceListener",
         WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_VISIBLE,
-        0, 0, 300, 400,
+        10, 20, 300, 400,
         NULL, NULL, NULL, NULL);
 
     if (!message_wnd_)
