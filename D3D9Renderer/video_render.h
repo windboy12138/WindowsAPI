@@ -6,7 +6,10 @@
 #include <combaseapi.h>
 #include <dxva2api.h>
 #include <memory.h>
+#include <iostream>
 #include "../common/convert_from_argb.h"
+
+#define RTC_LOG(INFO) std::cout
 
 class WebrtcVideoRendererD3D9Impl
 {

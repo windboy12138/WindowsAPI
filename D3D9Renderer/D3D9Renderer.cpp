@@ -76,6 +76,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
     }
 
+    if (bmp_data)
+    {
+        delete[] bmp_data;
+    }
+
     return (int) msg.wParam;
 }
 
@@ -175,7 +180,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;
             case IDM_CONTROL:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Control);
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), NULL, Control);
                 break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);
@@ -291,6 +296,12 @@ INT_PTR CALLBACK Control(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         if (LOWORD(wParam) == IDCANCEL)
         {
             EndDialog(hDlg, LOWORD(wParam));
+            return (INT_PTR)TRUE;
+        }
+        if (LOWORD(wParam) == IDEXIT)
+        {
+            EndDialog(hDlg, LOWORD(wParam));
+            PostMessage(main_wnd, WM_DESTROY, NULL, NULL);
             return (INT_PTR)TRUE;
         }
     }

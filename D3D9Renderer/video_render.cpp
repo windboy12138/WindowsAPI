@@ -348,7 +348,7 @@ void WebrtcVideoRendererD3D9Impl::RenderOneTime()
     hr = d3d_device_->EndScene();
     if (FAILED(hr))
     {
-        //RTC_LOG(LS_INFO) << "d3d_device EndScene failed." << hr;
+        RTC_LOG(LS_INFO) << "d3d_device EndScene failed." << hr;
         return;
     }
 
@@ -358,7 +358,7 @@ void WebrtcVideoRendererD3D9Impl::RenderOneTime()
     hr = d3d_device_->Present(NULL, &rect, NULL, NULL);
     if (FAILED(hr))
     {
-        //RTC_LOG(LS_INFO) << "d3d_device Present failed." << hr;
+        RTC_LOG(LS_INFO) << "d3d_device Present failed." << hr;
         return;
     }
 }

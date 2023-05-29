@@ -16,8 +16,9 @@
 #define IDREAD                          1000
 #define IDLOAD                          1001
 #define IDRENDER                        1002
-#define IDLOAD2                         1003
 #define IDCURSOR                        1003
+#define IDCURSOR2                       1004
+#define IDEXIT                          1004
 #define ID_32771                        32771
 #define IDM                             32772
 #define IDM_CONTROL                     32773
