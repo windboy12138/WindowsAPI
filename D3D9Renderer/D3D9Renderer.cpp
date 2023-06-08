@@ -298,6 +298,7 @@ INT_PTR CALLBACK Control(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             EndDialog(hDlg, LOWORD(wParam));
             return (INT_PTR)TRUE;
         }
+
         if (LOWORD(wParam) == IDEXIT)
         {
             EndDialog(hDlg, LOWORD(wParam));
