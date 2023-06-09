@@ -29,6 +29,8 @@ public:
 // hide     隐藏 派生类的同名函数将基类的函数隐藏了，使用基类指针则访问基类的函数，使用派生类的指针则访问派生类的函数
 //               即便参数不同、返回值不同，只要函数名字相同，派生类就会隐藏基类的函数
 
+// 加基类的类名限定作用域，可以直接访问基类的函数使用
+
 int main()
 {
     Dad* ptr = nullptr;
@@ -39,10 +41,16 @@ int main()
     ptr->Fun1();
     ptr->Fun2();
     ptr->Fun3(3);
+
     std::cout << std::endl;
     ptr2->Fun1();
     ptr2->Fun2();
     ptr2->Fun3();
+
+    std::cout << std::endl;
+    ptr2->Dad::Fun1();
+    ptr2->Dad::Fun2();
+    ptr2->Dad::Fun3(4);
     getchar();
     std::cout << "Hello World!\n";
 }
