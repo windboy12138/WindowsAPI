@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D3D9Renderer", "D3D9Rendere
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PolymorphismsC++", "PolymorphismsC++\PolymorphismsC++.vcxproj", "{50E1D868-5B4A-477F-ADAB-035477139634}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DefaultFunctionParameter", "DefaultFunctionParameter\DefaultFunctionParameter.vcxproj", "{542570EF-49A8-40AC-A6A1-42CDF4A9C143}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -110,6 +112,14 @@ Global
 		{50E1D868-5B4A-477F-ADAB-035477139634}.Release|x64.Build.0 = Release|x64
 		{50E1D868-5B4A-477F-ADAB-035477139634}.Release|x86.ActiveCfg = Release|Win32
 		{50E1D868-5B4A-477F-ADAB-035477139634}.Release|x86.Build.0 = Release|Win32
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Debug|x64.ActiveCfg = Debug|x64
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Debug|x64.Build.0 = Debug|x64
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Debug|x86.ActiveCfg = Debug|Win32
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Debug|x86.Build.0 = Debug|Win32
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Release|x64.ActiveCfg = Release|x64
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Release|x64.Build.0 = Release|x64
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Release|x86.ActiveCfg = Release|Win32
+		{542570EF-49A8-40AC-A6A1-42CDF4A9C143}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
