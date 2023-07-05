@@ -52,6 +52,7 @@ int main()
     std::cout << "WebRTC capture differ wrapper method cost " << duration2 << "ms" << ", pure compare time " << time_duration2 << "ms" << std::endl;
 
     bool is_res_equal = true;
+    int same_frame_cnt = 0;
     if (res1.size() == res2.size())
     {
         for (int i = 0; i < res1.size(); i++)
@@ -61,6 +62,10 @@ int main()
                 is_res_equal = false;
                 break;
             }
+            if (res1[i] == res2[i] && res1[i] == false)
+            {
+                same_frame_cnt++;
+            }
         }
     }
     else
@@ -69,7 +74,7 @@ int main()
         std::cout << "Compare results size is not equal" << std::endl;
     }
 
-    std::cout << "Compared " << res1.size() << " times, all result is equal=" << is_res_equal << std::endl;
+    std::cout << "Compared " << res1.size() << " times, " << same_frame_cnt << " times are same frame" << ", all result is equal = " << is_res_equal << std::endl;
     return 0;
 }
 

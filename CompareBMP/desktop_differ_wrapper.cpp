@@ -2,7 +2,7 @@
 #include <memory.h>
 
 #pragma comment(lib, "system_wrappers.lib")
-#pragma comment(lib, "desktop_capture.lib")
+//#pragma comment(lib, "desktop_capture.lib")
 #pragma comment(lib, "desktop_capture_generic.lib")
 #pragma comment(lib, "desktop_capture_differ_sse2.lib")
 
