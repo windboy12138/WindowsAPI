@@ -139,10 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\common_utils.cc" />
     <ClCompile Include="CompareBMP.cpp" />
+    <ClCompile Include="desktop_differ_wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\common_utils.h" />
     <ClInclude Include="bmp.h" />
+    <ClInclude Include="desktop_differ_wrapper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

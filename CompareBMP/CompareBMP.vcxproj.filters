@@ -18,9 +18,21 @@
     <ClCompile Include="CompareBMP.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="desktop_differ_wrapper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\common_utils.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bmp.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="desktop_differ_wrapper.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\common_utils.h">
       <Filter>源文件</Filter>
     </ClInclude>
   </ItemGroup>

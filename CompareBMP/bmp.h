@@ -15,7 +15,7 @@ uint8_t* LoadBmpFile(const char *file_name)
 
     BITMAPFILEHEADER bmpFileHeader;
     infile.read(reinterpret_cast<char*>(&bmpFileHeader), sizeof(bmpFileHeader));
-    std::cout << "File size: " << bmpFileHeader.bfSize << std::endl;
+    std::cout << file_name << " size: " << bmpFileHeader.bfSize << std::endl;
 
 
     if (bmpFileHeader.bfType != 0x4D42)//校验：bfType是否为“BM” 0x424D
@@ -69,7 +69,7 @@ uint8_t* LoadBmpFile(const char* file_name, int& width, int& height)
 
     BITMAPFILEHEADER bmpFileHeader;
     infile.read(reinterpret_cast<char*>(&bmpFileHeader), sizeof(bmpFileHeader));
-    std::cout << "File size: " << bmpFileHeader.bfSize << std::endl;
+    std::cout << file_name << " size: " << bmpFileHeader.bfSize << std::endl;
 
 
     if (bmpFileHeader.bfType != 0x4D42)//校验：bfType是否为“BM” 0x424D
