@@ -11,6 +11,8 @@ static int time_duration2 = 0;
 
 bool DifferTwoFrame(const char* file1, const char* file2);
 bool FrameDifferWrapper(const char* file1, const char* file2);
+void CompareSameFrames(int rounds, std::vector<bool>& res, bool (*pfun)(const char*, const char*));
+void CompareDifferentFrames(int rounds, std::vector<bool>& res, bool (*pfun)(const char*, const char*));
 
 int main()
 {
@@ -18,34 +20,14 @@ int main()
     std::vector<bool> res2;
 
     int start = TimeMilliseconds();
-    for (int i = 1; i <= 20; i++)
-    {
-        for (int j = i; j <= 20; j++)
-        {
-            char file1[60];
-            char file2[60];
-            sprintf_s(file1, "../../data/nv12_src_%02d.bmp", i);
-            sprintf_s(file2, "../../data/nv12_src_%02d.bmp", j);
-            bool res = DifferTwoFrame(file1, file2);
-            res1.push_back(res);
-        }
-    }
+    //CompareDifferentFrames(1, res1, DifferTwoFrame);
+    CompareSameFrames(5, res1, DifferTwoFrame);
     int duration1 = TimeMilliseconds() - start;
     
 
     start = TimeMilliseconds();
-    for (int i = 1; i <= 20; i++)
-    {
-        for (int j = i; j <= 20; j++)
-        {
-            char file1[60];
-            char file2[60];
-            sprintf_s(file1, "../../data/nv12_src_%02d.bmp", i);
-            sprintf_s(file2, "../../data/nv12_src_%02d.bmp", j);
-            bool res = FrameDifferWrapper(file1, file2);
-            res2.push_back(res);
-        }
-    }
+    //CompareDifferentFrames(1, res2, FrameDifferWrapper);
+    CompareSameFrames(5, res2, FrameDifferWrapper);
     int duration2 = TimeMilliseconds() - start;
 
     std::cout << "HandMade method cost " << duration1 << "ms" << ", pure compare time " << time_duration1 << "ms" << std::endl;
@@ -74,8 +56,41 @@ int main()
         std::cout << "Compare results size is not equal" << std::endl;
     }
 
-    std::cout << "Compared " << res1.size() << " times, " << same_frame_cnt << " times are same frame" << ", all result is equal = " << is_res_equal << std::endl;
+    std::cout << "Compared " << res1.size() << " times, " << same_frame_cnt << " times are same frame" << ", all results are equal = " << is_res_equal << std::endl;
     return 0;
+}
+
+void CompareSameFrames(int rounds, std::vector<bool>& res, bool (*pfun)(const char*, const char*))
+{
+    for (int r = 0; r < rounds; r++)
+    {
+        for (int i = 1; i <= 20; i++)
+        {
+            char file[60];
+            sprintf_s(file, "../../data/nv12_src_%02d.bmp", i);
+            bool result = pfun(file, file);
+            res.push_back(result);
+        }
+    }
+}
+
+void CompareDifferentFrames(int rounds, std::vector<bool>& res, bool (*pfun)(const char*, const char*))
+{
+    for (int r = 0; r < rounds; r++)
+    {
+        for (int i = 1; i <= 20; i++)
+        {
+            for (int j = i; j <= 20; j++)
+            {
+                char file1[60];
+                char file2[60];
+                sprintf_s(file1, "../../data/nv12_src_%02d.bmp", i);
+                sprintf_s(file2, "../../data/nv12_src_%02d.bmp", j);
+                bool result = pfun(file1, file2);
+                res.push_back(result);
+            }
+        }
+    }
 }
 
 bool DifferTwoFrame(const char* file1, const char* file2)
