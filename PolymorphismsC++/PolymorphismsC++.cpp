@@ -4,6 +4,8 @@
 #include <iostream>
 #include <Windows.h>
 
+#include "Inherit.h"
+
 
 class Dad
 {
@@ -13,6 +15,8 @@ public:
     void Fun2() { std::cout << "I'm Fun2 of Dad" << std::endl; }
 
     void Fun3(int input) { std::cout << "I'm Fun3 of Dad" << std::endl; }
+
+    virtual void Fun4() {};
 };
 
 class Son : public Dad
@@ -33,6 +37,19 @@ public:
 
 int main()
 {
+    LocalStreamPublication* publication = new VideoCaptureDevicePublication;
+    publication->StartPublish();
+    publication->StopPublish();
+    publication->SetVideoDeviceID(nullptr);
+
+    std::cout << std::endl;
+    LocalStreamPublication* publication1 = new ScreenCastPublication;
+    publication1->StartPublish();
+    publication1->StopPublish();
+    publication1->SetVideoDeviceID(nullptr);
+    getchar();
+    return 0;
+
     Dad* ptr = nullptr;
     Son* ptr2 = nullptr;
     Son son;
@@ -41,6 +58,7 @@ int main()
     ptr->Fun1();
     ptr->Fun2();
     ptr->Fun3(3);
+    ptr->Fun4();
 
     std::cout << std::endl;
     ptr2->Fun1();
@@ -51,6 +69,7 @@ int main()
     ptr2->Dad::Fun1();
     ptr2->Dad::Fun2();
     ptr2->Dad::Fun3(4);
+    ptr2->Dad::Fun4();
     getchar();
     std::cout << "Hello World!\n";
 }
